@@ -1,6 +1,7 @@
 import urllib.request
 import datetime
 from bs4 import BeautifulSoup
+import MySQLdb
 
 # 引数jdateは2月5日（金）のような形式の文字列
 # return 2/5
