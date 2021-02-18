@@ -15,6 +15,9 @@ class WeatherItem:
   def to_string(self):
     return ' time: ' + self.date_time + '   temp:  ' + self.temperature
 
+  def insert_sql(self):
+    return "insert into chiyoda_ku values ('" + self.date_time + "', " + self.temperature + ')'
+
 
 def get_year():
   year = '{0:%Y}'.format(datetime.datetime.now())
@@ -42,7 +45,22 @@ def main():
         weatheritems.append(weatheritem)
 
       print_weatheritems(weatheritems)
-
+      # dbにインサートする場合は以下メソッドを呼ぶ
+      # insert_weatheritems(weatheritems)
+    
+def insert_weatheritems(weatheritems):
+  conn = MySQLdb.connect(
+      unix_socket = '/opt/bitnami/mysql/tmp/mysql.sock',
+      user = 'username',
+      passwd = 'password',
+      host = 'localhost',
+      db = 'weather')
+  cursor = conn.cursor()
+  for item in weatheritems:
+    cursor.execute(item.insert_sql())
+  conn.commit()
+  conn.close()
+    
 def print_weatheritems(itemlist):
   for item in itemlist:
     print(item.to_string())
