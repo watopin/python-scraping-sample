@@ -1,5 +1,5 @@
 # python-scraping-sample
 
-scraping with beautiful soup and insert scraped data into mysql with mysqldb.
+scraping with Beautiful Soup and insert scraped data into mysql with MySQLdb.
 
 sample target sites is https://weathernews.jp
